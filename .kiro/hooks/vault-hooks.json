@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "session-start",
+      "description": "Load CLAUDE.md vault rules into context. Shared with Claude Code.",
+      "trigger": "SessionStart",
+      "action": { "type": "command", "command": ".claude/hooks/session-start.sh" }
+    },
+    {
+      "name": "user-prompt-submit",
+      "description": "Inject vault folder reminder. Shared with Claude Code.",
+      "trigger": "UserPromptSubmit",
+      "action": { "type": "command", "command": ".claude/hooks/user-prompt-submit.sh" }
+    }
+  ]
+}
