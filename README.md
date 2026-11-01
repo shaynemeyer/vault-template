@@ -10,6 +10,18 @@ keep the AI agent following the vault's rules.
 - `bash`, `jq`, `python3`
 - [`gh`](https://cli.github.com) (optional; see Setup for alternatives)
 
+## Platform support
+
+| Platform | Status                             |
+| -------- | ---------------------------------- |
+| macOS    | Supported; tested with Claude Code |
+| Windows  | Not yet proven; work in progress   |
+
+On Windows, the hooks are bash scripts and need Git Bash and `jq`. Without Git
+Bash, Claude Code runs hooks in PowerShell, where they fail
+([Claude Code hooks](https://code.claude.com/docs/en/hooks)). Full Windows
+support is being tested.
+
 ## Setup
 
 1. Create your vault from this template:
@@ -31,13 +43,13 @@ keep the AI agent following the vault's rules.
 
 ## Structure
 
-| Folder | Purpose |
-|---|---|
-| `_inbox/` | Quick captures. Process within 7 days. |
-| `daily/` | One note per day, `YYYY-MM-DD.md`. Append-only. |
+| Folder      | Purpose                                            |
+| ----------- | -------------------------------------------------- |
+| `_inbox/`   | Quick captures. Process within 7 days.             |
+| `daily/`    | One note per day, `YYYY-MM-DD.md`. Append-only.    |
 | `projects/` | Active work only. Archive after 2 weeks untouched. |
-| `people/` | One folder per regular contact. Used for 1:1 prep. |
-| `_archive/` | Dormant material. Archive is not delete. |
+| `people/`   | One folder per regular contact. Used for 1:1 prep. |
+| `_archive/` | Dormant material. Archive is not delete.           |
 
 `CLAUDE.md` holds the rules the agent follows. Each folder's `README.md`
 describes it in more detail.
@@ -47,13 +59,13 @@ describes it in more detail.
 Scripts live in `.claude/hooks/`. Claude Code registers them in
 `.claude/settings.json`; Kiro registers them in `.kiro/hooks/vault-hooks.json`.
 
-| Hook | What it does | Claude Code | Kiro |
-|---|---|---|---|
-| `session-start.sh` | Loads `CLAUDE.md` into context | Yes | Yes |
-| `user-prompt-submit.sh` | Adds a folder-rules reminder to each prompt | Yes | Yes |
-| `post-tool-use.py` | Logs file edits to today's daily note | Yes | Not yet |
-| `stop.sh` | Asks the agent to log decisions at end of turn | Yes | Not yet |
-| `pre-compact.sh` | Asks the agent to log decisions before compaction | Yes | No equivalent |
+| Hook                    | What it does                                      | Claude Code | Kiro          |
+| ----------------------- | ------------------------------------------------- | ----------- | ------------- |
+| `session-start.sh`      | Loads `CLAUDE.md` into context                    | Yes         | Yes           |
+| `user-prompt-submit.sh` | Adds a folder-rules reminder to each prompt       | Yes         | Yes           |
+| `post-tool-use.py`      | Logs file edits to today's daily note             | Yes         | Not yet       |
+| `stop.sh`               | Asks the agent to log decisions at end of turn    | Yes         | Not yet       |
+| `pre-compact.sh`        | Asks the agent to log decisions before compaction | Yes         | No equivalent |
 
 `post-tool-use.py` and `stop.sh` aren't wired into Kiro yet: Kiro's docs don't
 specify the event fields they need.
@@ -61,5 +73,5 @@ specify the event fields they need.
 Docs: [Claude Code hooks](https://code.claude.com/docs/en/hooks),
 [Kiro hooks](https://kiro.dev/docs/hooks/index).
 
-Full guide: [_archive/docs/user-guide.md](_archive/docs/user-guide.md). It
+Full guide: [\_archive/docs/user-guide.md](_archive/docs/user-guide.md). It
 lives inside the vault's archive; delete it once you no longer need it.
