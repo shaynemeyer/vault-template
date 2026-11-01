@@ -8,7 +8,7 @@ keep the AI agent following the vault's rules.
 - [Obsidian](https://obsidian.md) (editor)
 - [Claude Code](https://code.claude.com/docs) and/or [Kiro](https://kiro.dev/docs)
 - `bash`, `jq`, `python3`
-- [`gh`](https://cli.github.com) (optional, to create a repo from this template)
+- [`gh`](https://cli.github.com) (optional; see Setup for alternatives)
 
 ## Setup
 
@@ -19,6 +19,10 @@ keep the AI agent following the vault's rules.
    ```
 
    Keep your vault private. It will hold your notes.
+
+   Without `gh`: click **Use this template** on GitHub, create a private repo,
+   then `git clone` it. Or click **Code**, then **Download ZIP** to keep the vault
+   local. The [user guide](_archive/docs/user-guide.md#steps) has details.
 
 2. Open the `my-vault` folder as a vault in Obsidian.
 3. Edit `CLAUDE.md`: set the title and adjust the rules to taste.

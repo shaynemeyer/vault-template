@@ -76,13 +76,44 @@ flowchart TD
     G -->|No| I[See Troubleshooting]
 ```
 
-1. **Create your vault.** Keep it private; it will hold your notes.
+1. **Create your vault.** Keep it private; it will hold your notes. Pick one
+   of these options.
+
+   **Option A: with `gh`.** Creates the repo and clones it in one step.
 
    ```bash
    gh repo create my-vault --private --template OWNER/vault-template --clone
    ```
 
-   Without `gh`: on GitHub, open the template and click **Use this template**.
+   To install `gh`: `brew install gh` on macOS, `winget install --id GitHub.cli`
+   on Windows, then `gh auth login`
+   ([installation docs](https://github.com/cli/cli#installation)).
+
+   **Option B: GitHub website and `git`.** No `gh` needed.
+
+   1. Open the template on GitHub and click **Use this template**, then
+      **Create a new repository**.
+   2. Name it (for example `my-vault`), choose **Private**, and click
+      **Create repository**.
+   3. Clone it:
+
+      ```bash
+      git clone https://github.com/YOUR-USER/my-vault.git
+      ```
+
+   See GitHub's guide to
+   [creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+
+   **Option C: no GitHub account.** Download the files and keep the vault
+   local.
+
+   1. On the template's GitHub page, click **Code**, then **Download ZIP**.
+   2. Unzip it and rename the folder to `my-vault`.
+   3. On macOS, make the hooks executable: `chmod +x .claude/hooks/*`.
+   4. Optional, for history: `git init` and commit.
+
+   Hidden folders (`.claude/`, `.kiro/`) are in the download. Your file
+   browser may hide them.
 
 2. **Open it in Obsidian.** Choose "Open folder as vault" and pick `my-vault`.
    Obsidian creates `.obsidian/` for its settings. The template's `.gitignore`
