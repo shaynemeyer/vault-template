@@ -56,3 +56,5 @@ specify the event fields they need.
 
 Docs: [Claude Code hooks](https://code.claude.com/docs/en/hooks),
 [Kiro hooks](https://kiro.dev/docs/hooks/index).
+
+Full guide: [docs/user-guide.md](docs/user-guide.md).
