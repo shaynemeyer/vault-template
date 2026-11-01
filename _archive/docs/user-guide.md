@@ -25,7 +25,9 @@ folder:
 - **Obsidian** is where you read and write notes.
 - **Claude Code** or **Kiro** is an assistant that files, links and summarizes
   notes.
-- **Git** keeps history and backs the vault up to a private repo.
+- **Storage** of your choice backs the vault up and syncs it: a private Git
+  repo, a cloud drive (iCloud, Dropbox, OneDrive, Google Drive) or Obsidian
+  Sync. See [Where to store your vault](#where-to-store-your-vault).
 
 ```mermaid
 flowchart LR
@@ -41,7 +43,7 @@ flowchart LR
     A -->|reads rules| MD
     A -->|reads and writes| F
     H -->|inject rules, log activity| A
-    F --> G[(Private Git repo)]
+    F --> G[(Private Git repo,<br/>cloud drive or<br/>Obsidian Sync)]
 ```
 
 `CLAUDE.md` tells the agent the rules: where things go, never delete, use ISO
@@ -104,11 +106,12 @@ flowchart TD
    See GitHub's guide to
    [creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-   **Option C: no GitHub account.** Download the files and keep the vault
-   local.
+   **Option C: no GitHub account.** Download the files and store the vault
+   wherever you like, such as a local folder or a cloud drive.
 
    1. On the template's GitHub page, click **Code**, then **Download ZIP**.
-   2. Unzip it and rename the folder to `my-vault`.
+   2. Unzip it, rename the folder to `my-vault`, and move it where you want
+      it to live (see [Where to store your vault](#where-to-store-your-vault)).
    3. On macOS, make the hooks executable: `chmod +x .claude/hooks/*`.
    4. Optional, for history: `git init` and commit.
 
@@ -137,6 +140,49 @@ flowchart TD
 5. **Check it works.** Ask "what are the vault rules?" The agent should
    describe the five folders. In Claude Code, `/hooks` lists the registered
    hooks.
+
+### Where to store your vault
+
+The vault is just a folder, so you can keep it anywhere. A private GitHub repo
+is one option, not a requirement.
+
+| Option | Good for | Watch out for |
+|---|---|---|
+| Private Git repo (GitHub, GitLab) | Full history, undo any change | Not automatic: you commit, push and pull |
+| iCloud Drive | macOS, iPhone, iPad | Obsidian warns that iCloud Drive on Windows may duplicate or corrupt files. On iOS, the vault must sit in iCloud Drive's `Obsidian` folder |
+| Dropbox | macOS and Windows | Not officially supported by Obsidian on iOS |
+| OneDrive | Windows and macOS | Mark the vault "Always keep on this device"; avoid Files On-Demand |
+| Google Drive | Windows, macOS, Android | Set the vault to Available offline; not officially supported on iOS |
+| Obsidian Sync | All platforms, including mobile | Paid service |
+| Local folder only | Single computer | No backup unless you add one |
+
+Source: Obsidian's guide to
+[syncing your notes across devices](https://obsidian.md/help/sync-notes), which
+covers each option in more detail, including Syncthing.
+
+```mermaid
+flowchart TD
+    Q1{Want full history<br/>and undo?} -->|Yes| GIT[Private Git repo]
+    Q1 -->|No| Q2{Need it on<br/>your phone?}
+    Q2 -->|Apple devices only| IC[iCloud Drive]
+    Q2 -->|Mixed or Android| OS[Obsidian Sync]
+    Q2 -->|No, desktops only| CD[Dropbox, OneDrive<br/>or Google Drive]
+```
+
+Things to keep in mind:
+
+- **Use one sync method per vault.** Obsidian advises against syncing the same
+  vault through two services at once, such as Obsidian Sync and iCloud. That
+  includes putting a Git repo inside a Dropbox or iCloud folder.
+- **Keep files on the device.** Cloud drives can move files online-only to
+  save space. The agent and hooks need the real files on disk.
+- **Hooks run only where the agent runs.** On your phone, Obsidian edits notes
+  but no hooks fire. Activity logging and end-of-session prompts happen only on
+  the computer running Claude Code or Kiro.
+- **Your notes are private data.** Whatever you pick, keep it private and
+  don't share links to the vault folder.
+- **`.gitignore` only applies to Git.** With a cloud drive, `.obsidian/`
+  settings sync along with your notes.
 
 ## 3. The folders
 

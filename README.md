@@ -32,6 +32,11 @@ support is being tested.
 
    Keep your vault private. It will hold your notes.
 
+   A private GitHub repo is one way to store and back up the vault. A folder in
+   iCloud Drive, Dropbox, OneDrive or Google Drive, or Obsidian Sync, works too.
+   Use one sync method per vault. See
+   [Where to store your vault](_archive/docs/user-guide.md#where-to-store-your-vault).
+
    Without `gh`: click **Use this template** on GitHub, create a private repo,
    then `git clone` it. Or click **Code**, then **Download ZIP** to keep the vault
    local. The [user guide](_archive/docs/user-guide.md#steps) has details.
