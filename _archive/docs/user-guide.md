@@ -3,6 +3,10 @@
 How to set up a vault from this template, use it day to day, and work with
 Claude Code or Kiro inside it.
 
+This guide ships in `_archive/docs/` so it stays inside the five-folder layout.
+Once you're set up, keep it for reference or delete the `_archive/docs/` folder.
+Delete it yourself: the agent's rules tell it never to delete notes.
+
 - [1. How it fits together](#1-how-it-fits-together)
 - [2. Setup](#2-setup)
 - [3. The folders](#3-the-folders)
@@ -123,7 +127,8 @@ my-vault/
       meetings/
         2026-10-28.md
   _archive/                dormant projects, old daily notes
-  docs/                    this guide
+    docs/
+      user-guide.md        this guide (safe to delete)
 ```
 
 | Folder | Put here | Rule of thumb |
@@ -133,8 +138,6 @@ my-vault/
 | `projects/` | Active work | Untouched for 2 weeks: archive it |
 | `people/` | One folder per regular contact | Read before a 1:1 |
 | `_archive/` | Anything dormant | Archive is not delete |
-
-`docs/` holds documentation for the template itself, not notes.
 
 ### Naming and format conventions
 
@@ -405,5 +408,5 @@ cp ../vault-template/.claude/hooks/stop.sh .claude/hooks/
 git diff                    # review before committing
 ```
 
-Only copy files under `.claude/`, `.kiro/` and `docs/`. Don't overwrite
+Only copy files under `.claude/`, `.kiro/` and `_archive/docs/`. Don't overwrite
 `CLAUDE.md` or folder READMEs you've customized.
