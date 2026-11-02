@@ -108,6 +108,26 @@ search, but its docs don't say whether shell commands are covered. Notes that
 must never be read belong where the agent can't read them at all, such as an
 encrypted disk image you unmount before a session.
 
+Claude Code sends what the agent reads to the model provider (Anthropic by
+default). To keep notes on your machine, you can point it at a local model
+instead: Ollama 0.14+ serves an Anthropic-compatible API
+([Ollama guide](https://ollama.com/blog/claude)).
+
+```bash
+export ANTHROPIC_AUTH_TOKEN=ollama
+export ANTHROPIC_BASE_URL=http://localhost:11434
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+claude --model qwen3.8:27b-mlx   # any local model with tool support
+```
+
+`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` turns off telemetry and feedback
+traffic to Anthropic. Also set `"skipWebFetchPreflight": true` in settings,
+or WebFetch still sends hostnames to Anthropic
+([data usage](https://code.claude.com/docs/en/data-usage)). Local models are
+usually weaker at following the vault's rules. This was tested once on macOS
+with `qwen3.8:27b-mlx`: only localhost connections were made, and the model
+archived a note instead of deleting it.
+
 Docs: [permissions](https://code.claude.com/docs/en/permissions),
 [sandboxing](https://code.claude.com/docs/en/sandboxing).
 
