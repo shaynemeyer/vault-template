@@ -3,6 +3,8 @@
 A plain-Markdown notes vault for Obsidian, with Claude Code and Kiro hooks that
 keep the AI agent following the vault's rules.
 
+Website: <https://shaynemeyer.github.io/vault-template/>
+
 ## Requirements
 
 - [Obsidian](https://obsidian.md) (editor)
@@ -77,6 +79,37 @@ specify the event fields they need.
 
 Docs: [Claude Code hooks](https://code.claude.com/docs/en/hooks),
 [Kiro hooks](https://kiro.dev/docs/hooks/index).
+
+## Sensitive notes
+
+The agent can read anything in the vault, and so can your sync or backup
+provider. Don't store passwords, keys or other secrets here.
+
+To keep a folder away from Claude Code, you need both a `Read` deny rule and
+the sandbox in `.claude/settings.json`. Either one alone leaks: the deny rule
+misses `grep -r` and scripts, and the sandbox misses the Read tool.
+
+```json
+{
+  "permissions": { "deny": ["Read(./private/**)"] },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false,
+    "failIfUnavailable": true,
+    "filesystem": { "denyRead": ["./private"] }
+  }
+}
+```
+
+This was tested on macOS with a top-level folder; nested paths are untested.
+The sandbox needs macOS, Linux or WSL2. Kiro's
+[`.kiroignore`](https://kiro.dev/docs/kiroignore/) blocks direct reads and
+search, but its docs don't say whether shell commands are covered. Notes that
+must never be read belong where the agent can't read them at all, such as an
+encrypted disk image you unmount before a session.
+
+Docs: [permissions](https://code.claude.com/docs/en/permissions),
+[sandboxing](https://code.claude.com/docs/en/sandboxing).
 
 Full guide: [\_archive/docs/user-guide.md](_archive/docs/user-guide.md). It
 lives inside the vault's archive; delete it once you no longer need it.
