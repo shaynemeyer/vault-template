@@ -61,6 +61,19 @@ support is being tested.
 `CLAUDE.md` holds the rules the agent follows. Each folder's `README.md`
 describes it in more detail.
 
+## Commands
+
+Slash commands live in `.claude/commands/` (Claude Code only; Kiro doesn't
+read them).
+
+| Command               | What it does                                                  |
+| --------------------- | ------------------------------------------------------------- |
+| `/capture <text>`     | Saves a quick note to `_inbox/<date>-<slug>.md`               |
+| `/daily`              | Creates today's daily note, or adds missing template sections |
+| `/process-inbox`      | Proposes a destination for each inbox note; moves on approval |
+| `/plan`               | Ranks active projects and names the next action               |
+| `/weekly-review`      | Summarizes the week and flags stale inbox notes and projects  |
+
 ## Hooks
 
 Scripts live in `.claude/hooks/`. Claude Code registers them in
