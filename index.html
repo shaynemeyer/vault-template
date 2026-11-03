@@ -179,7 +179,7 @@
 
   /* Setup */
   .steps { display: grid; gap: 14px; counter-reset: s; max-width: 760px; }
-  .step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; }
+  .step { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; }
   .step::before { counter-increment: s; content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
   .step h3 { margin: 6px 0 4px; font-size: 1.05rem; }
   .step p { margin: 0; color: var(--muted); }
