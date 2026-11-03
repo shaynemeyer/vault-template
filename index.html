@@ -77,7 +77,15 @@
   nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
   nav ul a { color: var(--muted); text-decoration: none; }
   nav ul a:hover { color: var(--text); }
-  @media (max-width: 640px) { nav ul li:not(:last-child) { display: none; } }
+  .menu { display: none; position: relative; }
+  .menu summary { list-style: none; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu .i-close, .menu[open] .i-open { display: none; }
+  .menu[open] .i-close { display: block; }
+  .menu ul { position: absolute; right: 0; top: calc(100% + 8px); flex-direction: column; gap: 0; min-width: 180px; padding: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+  .menu ul a { display: block; padding: 10px 12px; border-radius: 8px; }
+  .menu ul a:hover { background: var(--bg-alt); }
+  @media (max-width: 640px) { nav .links { display: none; } .menu { display: block; } }
 
   /* Hero */
   .hero { position: relative; overflow: hidden; padding: 88px 0 72px; text-align: center; }
@@ -206,14 +214,29 @@
       <span class="logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
       Vault Template
     </a>
-    <ul>
+    <ul class="links">
       <li><a href="#folders">Folders</a></li>
       <li><a href="#how">How it works</a></li>
       <li><a href="#setup">Setup</a></li>
       <li><a href="https://github.com/shaynemeyer/vault-template">GitHub</a></li>
     </ul>
+    <details class="menu" id="menu">
+      <summary aria-label="Menu">
+        <svg class="i-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </summary>
+      <ul>
+        <li><a href="#folders">Folders</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="https://github.com/shaynemeyer/vault-template">GitHub</a></li>
+      </ul>
+    </details>
   </div>
 </nav>
+<script>
+  document.querySelectorAll('#menu a').forEach(a => a.addEventListener('click', () => { document.getElementById('menu').open = false; }));
+</script>
 
 <header class="hero">
   <div class="wrap">
