@@ -74,6 +74,20 @@ read them).
 | `/plan`               | Ranks active projects and names the next action               |
 | `/weekly-review`      | Summarizes the week and flags stale inbox notes and projects  |
 
+### Optional: role-based weekly reviews
+
+Example reviews tailored to a way of working. Keep the ones that fit and delete
+the rest; `/weekly-review` works for everyone. See the
+[user guide](_archive/docs/user-guide.md#pick-a-weekly-review-for-your-role)
+for example workflows.
+
+| Command                     | For                 | Relies on                                         |
+| --------------------------- | ------------------- | ------------------------------------------------- |
+| `/weekly-review-pm`         | Product managers    | `projects/sprint-*/`, `relationship: direct-report` |
+| `/weekly-review-founder`    | Founders            | `projects/<project>/decisions.md`                 |
+| `/weekly-review-freelancer` | Freelancers         | `projects/<client>/scope.md` with `billing`       |
+| `/weekly-review-kw`         | Knowledge workers   | `people/<name>/open-asks.md`, `#later` tags       |
+
 ## Hooks
 
 Scripts live in `.claude/hooks/`. Claude Code registers them in

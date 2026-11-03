@@ -10,10 +10,14 @@ an assistant that reads, files, and summarizes notes.
 - `daily/` - One file per day, named `YYYY-MM-DD.md`. Append-only during the
   day. Action items may be extracted back into `_inbox/` at end of day.
 - `projects/<project>/` - Active work only. Each project has `README.md`, a
-  decision log, and working notes. Untouched for 2 weeks means archive it.
-  The active list should fit on one screen.
+  decision log (`decisions.md`), and working notes. Untouched for 2 weeks means archive it.
+  The active list should fit on one screen. Client projects also have
+  `scope.md` (the agreement, with a `billing` property: `hourly`, `fixed`,
+  `value`, or `retainer`) and `changes.md` (scope changes over time).
 - `people/<name>/` - One folder per regular contact: a profile note, a
   `meetings/` folder, and an open-asks note. Read this folder before 1:1 prep.
+  The profile note may set a `relationship` property (e.g. `direct-report`,
+  `manager`, `peer`, `client`).
 - `_archive/` - Dormant projects and processed daily notes. Archive is not
   delete.
 
@@ -28,6 +32,7 @@ an assistant that reads, files, and summarizes notes.
   `date`, `status`.
 - Use lowercase kebab-case for new file and folder names
   (e.g. `people/jane-doe/`).
+- Tag anything to revisit later with `#later`.
 - Do not edit anything in `.obsidian/`.
 - No emojis.
 

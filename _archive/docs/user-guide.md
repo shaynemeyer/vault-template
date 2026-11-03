@@ -265,7 +265,8 @@ flowchart LR
 - **Process later.** Ask the agent to process the inbox. It proposes a
   destination for each note and moves them once you approve.
 - **Review weekly.** Ask for a weekly review to catch stale inbox notes and
-  dormant projects.
+  dormant projects. Optional role-based reviews are covered in
+  [Pick a weekly review for your role](#pick-a-weekly-review-for-your-role).
 
 ## 5. Working with the agent
 
@@ -348,7 +349,7 @@ so it doesn't fire after `/clear` or compaction.
 - 09:20 Edit: `people/jane-doe/open-asks.md`
 
 ## Decisions
-- 09:25 Decision: Move launch to Q1. Reasoning: vendor delay.
+- 09:25 Move launch to Q1. Reasoning: vendor delay.
 ```
 
 `post-tool-use.py` writes the activity lines. The agent writes the decisions
@@ -446,6 +447,44 @@ added to every prompt, so keep it short.
 
 - Claude Code: remove its entry from `.claude/settings.json`.
 - Kiro: add `"enabled": false` to its entry in `vault-hooks.json`.
+
+### Pick a weekly review for your role
+
+`/weekly-review` works for everyone. The four role-based reviews in
+`.claude/commands/` are optional examples: keep the ones that match how you
+work, delete the rest, or copy one as a starting point for your own. Each
+relies on a few conventions, so it only produces useful output if your notes
+follow them.
+
+**Product manager: `/weekly-review-pm`**
+
+- Keep one folder per sprint, e.g. `projects/sprint-2026-11/`.
+- Set `relationship: direct-report` in each report's `profile.md`.
+- Log 1:1s in `people/<name>/meetings/` and asks in `open-asks.md`.
+- On Friday you get sprint changes, 1:1 prep per report, and stakeholder notes.
+
+**Founder: `/weekly-review-founder`**
+
+- Log decisions in each project's `decisions.md` or under `## Decisions` in
+  the daily note.
+- Fill in `## Done` and `## Open` in the daily note as you go.
+- At week's end you get decisions, shipped work ready to paste into an
+  investor update, and open questions.
+
+**Freelancer: `/weekly-review-freelancer`**
+
+- Give each client a project folder with `scope.md` and `changes.md`.
+- Set `billing` in `scope.md`: `hourly`, `fixed`, `value`, or `retainer`.
+- Write hours in the daily note if you bill hourly.
+- Before invoicing you get hours, scope changes, and a flag for any client
+  whose work has drifted out of scope.
+
+**Knowledge worker: `/weekly-review-kw`**
+
+- Keep `open-asks.md` current for each regular contact.
+- Tag anything you want to come back to with `#later`.
+- Each week you get meetings, decisions, and asks that have gone quiet,
+  including ones older than the week.
 
 ## 8. Troubleshooting
 

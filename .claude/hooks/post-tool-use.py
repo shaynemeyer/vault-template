@@ -22,7 +22,23 @@ elif "## Vault Activity" not in day_file.read_text():
     with day_file.open("a") as f:
         f.write("\n## Vault Activity\n")
 
+
+def insert_activity(text, entry):
+    """Insert entry as the last line of the Vault Activity section."""
+    lines = text.splitlines(keepends=True)
+    start = next(i for i, line in enumerate(lines) if line.startswith("## Vault Activity"))
+    end = next(
+        (i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")),
+        len(lines),
+    )
+    while end > start + 1 and not lines[end - 1].strip():
+        end -= 1
+    if not lines[end - 1].endswith("\n"):
+        lines[end - 1] += "\n"
+    lines.insert(end, entry)
+    return "".join(lines)
+
+
 ts = datetime.datetime.now().strftime("%H:%M")
 rel = str(file_path).removeprefix(str(vault) + "/")
-with day_file.open("a") as f:
-    f.write(f"- {ts} {tool}: `{rel}`\n")
+day_file.write_text(insert_activity(day_file.read_text(), f"- {ts} {tool}: `{rel}`\n"))

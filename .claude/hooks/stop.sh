@@ -16,8 +16,9 @@ ACTIVITY=$(awk '/^## Vault Activity/{f=1;next} /^## /{f=0} f' "$DAILY" \
 
 [[ "$ACTIVITY" -eq 0 ]] && exit 0
 
-DIRECTIVE="Session ending. Apply the Session Closing rules from CLAUDE.md:
-1. Append any decisions made to daily/${TODAY}.md under ## Decisions
+DIRECTIVE="Session ending. Close out the session:
+1. Append any decisions made to daily/${TODAY}.md under a ## Decisions heading,
+   one bullet each: '- HH:MM <decision>. Reasoning: <one sentence>.'
 2. Update active project READMEs if next actions changed
 3. Update people/ logs if anyone was discussed
 4. Note any _inbox/ items that got processed
