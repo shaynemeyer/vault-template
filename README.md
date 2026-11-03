@@ -158,5 +158,19 @@ archived a note instead of deleting it.
 Docs: [permissions](https://code.claude.com/docs/en/permissions),
 [sandboxing](https://code.claude.com/docs/en/sandboxing).
 
+## Developing the template
+
+Your own vault commits daily notes as usual. When working on the template
+itself, the hooks still write `daily/<date>.md`, which shouldn't ship. Ignore
+it in your clone only:
+
+```bash
+echo 'daily/2*.md' >> .git/info/exclude
+```
+
+`.git/info/exclude` is never committed, so vaults created from the template
+still track daily notes. Keep notes about template work in `.local-only/`,
+which `.gitignore` excludes.
+
 Full guide: [\_archive/docs/user-guide.md](_archive/docs/user-guide.md). It
 lives inside the vault's archive; delete it once you no longer need it.
